@@ -6,16 +6,19 @@ import { Input, Radio } from 'antd';
 import BloodModal from '../components/BloodModal';
 import MBTIModal from '../components/MBTIModal';
 import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as infoActions } from '../redux/modules/info';
 
 function MyInfo(props) {
   const [name, setName] = useState('');
   const [sex, setSex] = useState('남');
   const [birth, setBirth] = useState('');
-  // const [mbti, setMbti] = useState('');
+  const [bloodModal, setBloodModal] = useState(false);
+  const [mbtiModal, setMbtiModal] = useState(false);
 
   const dispatch = useDispatch();
 
   const myBlood = useSelector((state) => state.info.myBlood);
+  const myMbti = useSelector((state) => state.info.myMbti);
 
   // 이름 상태
   const onChangeName = (e) => {
@@ -32,10 +35,16 @@ function MyInfo(props) {
     setBirth(e.target.value);
   };
 
-  const [bloodModal, setBloodModal] = useState(false);
-  const [mbtiModal, setMbtiModal] = useState(false);
-
   const nextInfo = () => {
+    dispatch(
+      infoActions.myInfo({
+        name: name,
+        sex: sex,
+        birth: birth,
+        blood: myBlood,
+        mbti: myMbti,
+      }),
+    );
     window.scrollTo({ top: 0, left: 0 });
     props.history.push('/yourProfile');
   };
@@ -96,7 +105,9 @@ function MyInfo(props) {
             </SortWrap>
             <SortWrap>
               <Text>MBTI</Text>
-              <Modal onClick={OpenMbtiModal}>MBTI를 입력해주세요</Modal>
+              <Modal onClick={OpenMbtiModal} isBoolean={Boolean(myMbti)}>
+                {myMbti === '' ? 'MBTI를 입력해주세요' : myMbti}
+              </Modal>
             </SortWrap>
 
             <FindMBTI>
