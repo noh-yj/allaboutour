@@ -1,9 +1,15 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { CloseOutlined } from '@ant-design/icons';
+import { actionCreators as infoActions } from '../redux/modules/info';
+import { useDispatch } from 'react-redux';
+import { history } from '../redux/configureStore';
 
 function MBTIModal(props) {
   const { status, close } = props;
+  const dispatch = useDispatch();
+  const type = history.location.pathname;
+
   return (
     <>
       {status ? (
@@ -18,53 +24,165 @@ function MBTIModal(props) {
               />
             </Title>
             <Main>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('INTJ'))
+                    : dispatch(infoActions.yourMbti('INTJ'));
+                  close();
+                }}
+              >
+                <span>INTJ</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('ENTJ'))
+                    : dispatch(infoActions.yourMbti('ENTJ'));
+                  close();
+                }}
+              >
+                <span>ENTJ</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('INTP'))
+                    : dispatch(infoActions.yourMbti('INTP'));
+                  close();
+                }}
+              >
+                <span>INTP</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('ENTP'))
+                    : dispatch(infoActions.yourMbti('ENTP'));
+                  close();
+                }}
+              >
+                <span>ENTP</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('INFJ'))
+                    : dispatch(infoActions.yourMbti('INFJ'));
+                  close();
+                }}
+              >
+                <span>INFJ</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('ENFJ'))
+                    : dispatch(infoActions.yourMbti('ENFJ'));
+                  close();
+                }}
+              >
+                <span>ENFJ</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('INFP'))
+                    : dispatch(infoActions.yourMbti('INFP'));
+                  close();
+                }}
+              >
+                <span>INFP</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('ENFP'))
+                    : dispatch(infoActions.yourMbti('ENFP'));
+                  close();
+                }}
+              >
+                <span>ENFP</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('ISTJ'))
+                    : dispatch(infoActions.yourMbti('ISTJ'));
+                  close();
+                }}
+              >
+                <span>ISTJ</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('ESTJ'))
+                    : dispatch(infoActions.yourMbti('ESTJ'));
+                  close();
+                }}
+              >
+                <span>ESTJ</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('ISFJ'))
+                    : dispatch(infoActions.yourMbti('ISFJ'));
+                  close();
+                }}
+              >
+                <span>ISFJ</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('ESFJ'))
+                    : dispatch(infoActions.yourMbti('ESFJ'));
+                  close();
+                }}
+              >
+                <span>ESFJ</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('ISTP'))
+                    : dispatch(infoActions.yourMbti('ISTP'));
+                  close();
+                }}
+              >
+                <span>ISTP</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('ESTP'))
+                    : dispatch(infoActions.yourMbti('ESTP'));
+                  close();
+                }}
+              >
+                <span>ESTP</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('ISFP'))
+                    : dispatch(infoActions.yourMbti('ISFP'));
+                  close();
+                }}
+              >
+                <span>ISFP</span>
               </div>
-              <div onClick={close}>
-                <span>mbti</span>
+              <div
+                onClick={() => {
+                  type === '/myProfile'
+                    ? dispatch(infoActions.myMbti('ESFP'))
+                    : dispatch(infoActions.yourMbti('ESFP'));
+                  close();
+                }}
+              >
+                <span>ESFP</span>
               </div>
             </Main>
           </ModalContainer>
