@@ -11,7 +11,7 @@ function MyInfo(props) {
   const [name, setName] = useState('');
   const [sex, setSex] = useState('남');
   const [birth, setBirth] = useState('');
-  const [mbti, setMbti] = useState('');
+  // const [mbti, setMbti] = useState('');
 
   const dispatch = useDispatch();
 
