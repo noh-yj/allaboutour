@@ -12,6 +12,7 @@ on:
 jobs: # Job 설정
   build:
     runs-on: ubuntu-latest # Job 가상환경 인스턴스
+    # yarn을 쓸 경우
     steps:
       - uses: actions/checkout@v2
       - name: Get yarn cache directory path
