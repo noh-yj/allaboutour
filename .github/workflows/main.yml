@@ -2,9 +2,11 @@ name: React build # Workflow 이름
 # Event 감지
 on:
   push:
-      branches: [ main ]
-    pull_request:
-      branches: [ main ]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 # main branch에서 push 이벤트가 일어났을 때만 실행
 
 jobs: # Job 설정
@@ -13,8 +15,8 @@ jobs: # Job 설정
     steps:
       - uses: actions/checkout@v2
       - name: Cache node modules
-        uses: actions/cache@v2
         id: node-cache
+        uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
         with:
@@ -22,16 +24,12 @@ jobs: # Job 설정
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
-
-
       - name: Install Dependencies
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
 
       - name: Build # React Build
         run: yarn build
-
       - name: Deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
