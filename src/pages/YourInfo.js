@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Title from '../Elements/Title';
 import Button from '../Elements/Button';
 import { Input, Radio } from 'antd';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import BloodModal from '../components/BloodModal';
 import MBTIModal from '../components/MBTIModal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,7 +39,7 @@ function YourInfo(props) {
 
   const result = () => {
     if (name === '' || birth === '' || yourBlood === '' || yourMbti === '') {
-      swal({
+      Swal.fire({
         title: '정보를 모두 입력하세요.',
         icon: 'warning',
       });
@@ -47,7 +47,7 @@ function YourInfo(props) {
     }
 
     if (!nameCheck(name)) {
-      swal({
+      Swal.fire({
         text: '이름 형식이 옳바르지 않습니다. \n한글2~4자 또는 영문2~10자 이내로 입력하세요.',
         icon: 'warning',
       });
@@ -55,7 +55,7 @@ function YourInfo(props) {
     }
 
     if (!birthCheck(birth)) {
-      swal({
+      Swal.fire({
         text: '생년월일 형식이 옳바르지 않습니다. \n 19991111 형식으로 입력하세요.',
         icon: 'warning',
       });
