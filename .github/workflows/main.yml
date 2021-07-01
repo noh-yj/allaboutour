@@ -40,4 +40,4 @@ jobs: # Job 설정
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            _site s3://allaboutour.co.kr
+            build s3://allaboutour.co.kr
