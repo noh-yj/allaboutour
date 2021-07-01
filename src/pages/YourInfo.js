@@ -5,18 +5,48 @@ import Button from '../Elements/Button';
 import { Input, Radio } from 'antd';
 import BloodModal from '../components/BloodModal';
 import MBTIModal from '../components/MBTIModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators as infoActions } from '../redux/modules/info';
 
 function YourInfo(props) {
+  const [name, setName] = useState('');
   const [sex, setSex] = useState('남');
+  const [birth, setBirth] = useState('');
   const [bloodModal, setBloodModal] = useState(false);
   const [mbtiModal, setMbtiModal] = useState(false);
-  const result = () => {
-    window.scrollTo({ top: 0, left: 0 });
-    props.history.push('/result');
+
+  const dispatch = useDispatch();
+
+  const yourBlood = useSelector((state) => state.info.yourBlood);
+  const yourMbti = useSelector((state) => state.info.yourMbti);
+
+  // 이름 상태
+  const onChangeName = (e) => {
+    setName(e.target.value);
   };
 
-  const onChange = (e) => {
+  // 성별 상태
+  const onChangeSex = (e) => {
     setSex(e.target.value);
+  };
+
+  // 생년월일 상태
+  const onChangeBirth = (e) => {
+    setBirth(e.target.value);
+  };
+
+  const result = () => {
+    dispatch(
+      infoActions.yourInfo({
+        name: name,
+        sex: sex,
+        birth: birth,
+        blood: yourBlood,
+        mbti: yourMbti,
+      }),
+    );
+    window.scrollTo({ top: 0, left: 0 });
+    props.history.push('/result');
   };
 
   // 혈액형 모달창
@@ -44,11 +74,15 @@ function YourInfo(props) {
             <main>
               <SortWrap>
                 <Text>내이름</Text>
-                <Input placeholder='이름을 입력해주세요' bordered={false} />
+                <Input
+                  placeholder='이름을 입력해주세요'
+                  bordered={false}
+                  onChange={onChangeName}
+                />
               </SortWrap>
               <SortWrap>
                 <Text>성별</Text>
-                <Radio.Group onChange={onChange} value={sex}>
+                <Radio.Group onChange={onChangeSex} value={sex}>
                   <Radio value={'남'} style={{ marginRight: '70px' }}>
                     남
                   </Radio>
@@ -57,15 +91,24 @@ function YourInfo(props) {
               </SortWrap>
               <SortWrap>
                 <Text>생년월일</Text>
-                <Input placeholder='8자리를 입력해주세요' bordered={false} />
+                <Input
+                  placeholder='8자리를 입력해주세요 ex)19991111'
+                  bordered={false}
+                  onChange={onChangeBirth}
+                  maxLength={8}
+                />
               </SortWrap>
               <SortWrap>
                 <Text>혈액형</Text>
-                <Modal onClick={OpenBloodModal}>혈액형을 입력해주세요</Modal>
+                <Modal onClick={OpenBloodModal} isBoolean={Boolean(yourBlood)}>
+                  {yourBlood === '' ? '혈액형을 입력해주세요' : yourBlood}
+                </Modal>
               </SortWrap>
               <SortWrap>
                 <Text>MBTI</Text>
-                <Modal onClick={OpenMbtiModal}>MBTI를 입력해주세요</Modal>
+                <Modal onClick={OpenMbtiModal} isBoolean={Boolean(yourMbti)}>
+                  {yourMbti === '' ? '혈액형을 입력해주세요' : yourMbti}
+                </Modal>
               </SortWrap>
 
               <FindMBTI>
@@ -80,7 +123,7 @@ function YourInfo(props) {
 
               <BtnWrap>
                 <Button startBtn _onClick={result}>
-                  다음으로
+                  결과보기
                 </Button>
               </BtnWrap>
             </main>
@@ -135,7 +178,7 @@ const Text = styled.span`
 const Modal = styled.div`
   width: 240px;
   padding: 4px 11px;
-  color: #999999;
+  color: ${(props) => (props.isBoolean ? 'rgba(0, 0, 0, 0.85)' : '#999999')};
   cursor: pointer;
 `;
 

@@ -7,6 +7,7 @@ import BloodModal from '../components/BloodModal';
 import MBTIModal from '../components/MBTIModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as infoActions } from '../redux/modules/info';
+// import { nameCheck, birthCheck } from '../shared/exp';
 
 function MyInfo(props) {
   const [name, setName] = useState('');
@@ -19,6 +20,7 @@ function MyInfo(props) {
 
   const myBlood = useSelector((state) => state.info.myBlood);
   const myMbti = useSelector((state) => state.info.myMbti);
+  const myInfo = useSelector((state) => state.info.myInfo);
 
   // 이름 상태
   const onChangeName = (e) => {
@@ -77,6 +79,7 @@ function MyInfo(props) {
                 placeholder='이름을 입력해주세요'
                 bordered={false}
                 onChange={onChangeName}
+                value={myInfo.name}
               />
             </SortWrap>
             <SortWrap>
@@ -91,10 +94,11 @@ function MyInfo(props) {
             <SortWrap>
               <Text>생년월일</Text>
               <Input
-                placeholder='8자리를 입력해주세요'
+                placeholder='8자리를 입력해주세요 ex)19991111'
                 bordered={false}
                 onChange={onChangeBirth}
                 maxLength={8}
+                value={myInfo.birth}
               />
             </SortWrap>
             <SortWrap>
