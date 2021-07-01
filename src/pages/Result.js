@@ -1,11 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import ProgressBar from '../components/ProgressBar';
 import ResultInfo from '../components/ResultInfo';
 import Button from '../Elements/Button';
+import { actionCreators as infoActions } from '../redux/modules/info';
 
 function Result(props) {
+  const dispatch = useDispatch();
   const main = () => {
+    dispatch(infoActions.clearInfo());
     window.scrollTo({ top: 0, left: 0 });
     props.history.push('/');
   };

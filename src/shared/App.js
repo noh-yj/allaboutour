@@ -6,6 +6,7 @@ import { history } from '../redux/configureStore';
 import Main from '../pages/Main';
 import MyInfo from '../pages/MyInfo';
 import YourInfo from '../pages/YourInfo';
+import Loading from '../pages/Loading';
 import Result from '../pages/Result';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path='/' exact component={Main} />
         <Route path='/myProfile' exact component={MyInfo} />
         <Route path='/yourProfile' exact component={YourInfo} />
+        <Route path='/loading' exact component={Loading} />
         <Route path='/result' exact component={Result} />
       </ConnectedRouter>
     </>

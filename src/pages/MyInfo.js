@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Title from '../Elements/Title';
 import Button from '../Elements/Button';
 import { Input, Radio } from 'antd';
-// import swal from 'sweetalert';
+import swal from 'sweetalert';
 import BloodModal from '../components/BloodModal';
 import MBTIModal from '../components/MBTIModal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +21,6 @@ function MyInfo(props) {
 
   const myBlood = useSelector((state) => state.info.myBlood);
   const myMbti = useSelector((state) => state.info.myMbti);
-  const myInfo = useSelector((state) => state.info.myInfo);
 
   // 이름 상태
   const onChangeName = (e) => {
@@ -40,21 +39,28 @@ function MyInfo(props) {
 
   const nextInfo = () => {
     if (name === '' || birth === '' || myBlood === '' || myMbti === '') {
-      window.alert('정보를 모두 입력하세요.');
+      swal({
+        title: '정보를 모두 입력하세요.',
+        icon: 'warning',
+      });
       return;
     }
 
     if (!nameCheck(name)) {
-      window.alert(
-        '이름 형식이 맞지 않습니다. 한글 2~4자 또는 영문 2~10자 이내로 입력하세요.',
-      );
+      swal({
+        text: '이름 형식이 옳바르지 않습니다. \n한글2~4자 또는 영문2~10자 이내로 입력하세요.',
+        icon: 'warning',
+      });
       return;
     }
 
     if (!birthCheck(birth)) {
-      window.alert(
-        '생년월일 형식이 맞지 않습니다. 19991111 형식으로 입력하세요.',
-      );
+      swal({
+        text: '생년월일 형식이 옳바르지 않습니다. \n 19991111 형식으로 입력하세요.',
+        icon: 'warning',
+      });
+
+      return;
     }
 
     dispatch(
@@ -93,12 +99,12 @@ function MyInfo(props) {
           <Title>나의 정보를 입력해주세요</Title>
           <main>
             <SortWrap>
-              <Text>내이름</Text>
+              <Text>이름</Text>
               <Input
                 placeholder='이름을 입력해주세요'
                 bordered={false}
                 onChange={onChangeName}
-                value={myInfo.name}
+                maxLength={10}
               />
             </SortWrap>
             <SortWrap>
@@ -117,7 +123,6 @@ function MyInfo(props) {
                 bordered={false}
                 onChange={onChangeBirth}
                 maxLength={8}
-                value={myInfo.birth}
               />
             </SortWrap>
             <SortWrap>
