@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import Title from '../Elements/Title';
 import Button from '../Elements/Button';
 import { Input, Radio } from 'antd';
+import swal from 'sweetalert';
 import BloodModal from '../components/BloodModal';
 import MBTIModal from '../components/MBTIModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as infoActions } from '../redux/modules/info';
+import { nameCheck, birthCheck } from '../shared/exp';
 
 function YourInfo(props) {
   const [name, setName] = useState('');
@@ -36,6 +38,30 @@ function YourInfo(props) {
   };
 
   const result = () => {
+    if (name === '' || birth === '' || yourBlood === '' || yourMbti === '') {
+      swal({
+        title: '정보를 모두 입력하세요.',
+        icon: 'warning',
+      });
+      return;
+    }
+
+    if (!nameCheck(name)) {
+      swal({
+        text: '이름 형식이 옳바르지 않습니다. \n한글2~4자 또는 영문2~10자 이내로 입력하세요.',
+        icon: 'warning',
+      });
+      return;
+    }
+
+    if (!birthCheck(birth)) {
+      swal({
+        text: '생년월일 형식이 옳바르지 않습니다. \n 19991111 형식으로 입력하세요.',
+        icon: 'warning',
+      });
+      return;
+    }
+
     dispatch(
       infoActions.yourInfo({
         name: name,
@@ -46,7 +72,7 @@ function YourInfo(props) {
       }),
     );
     window.scrollTo({ top: 0, left: 0 });
-    props.history.push('/result');
+    props.history.push('/loading');
   };
 
   // 혈액형 모달창
@@ -73,11 +99,12 @@ function YourInfo(props) {
             <Title>상대의 정보를 입력해주세요</Title>
             <main>
               <SortWrap>
-                <Text>내이름</Text>
+                <Text>이름</Text>
                 <Input
                   placeholder='이름을 입력해주세요'
                   bordered={false}
                   onChange={onChangeName}
+                  maxLength={10}
                 />
               </SortWrap>
               <SortWrap>
