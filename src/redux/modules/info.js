@@ -36,7 +36,7 @@ const resultInfoDB = () => {
     dispatch(resultInfo());
     setTimeout(() => {
       history.push('/result');
-    }, 1000);
+    }, 700);
   };
 };
 
