@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import Title from '../Elements/Title';
 import Button from '../Elements/Button';
 import { Input, Radio } from 'antd';
+// import swal from 'sweetalert';
 import BloodModal from '../components/BloodModal';
 import MBTIModal from '../components/MBTIModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as infoActions } from '../redux/modules/info';
-// import { nameCheck, birthCheck } from '../shared/exp';
+import { nameCheck, birthCheck } from '../shared/exp';
 
 function MyInfo(props) {
   const [name, setName] = useState('');
@@ -38,6 +39,24 @@ function MyInfo(props) {
   };
 
   const nextInfo = () => {
+    if (name === '' || birth === '' || myBlood === '' || myMbti === '') {
+      window.alert('정보를 모두 입력하세요.');
+      return;
+    }
+
+    if (!nameCheck(name)) {
+      window.alert(
+        '이름 형식이 맞지 않습니다. 한글 2~4자 또는 영문 2~10자 이내로 입력하세요.',
+      );
+      return;
+    }
+
+    if (!birthCheck(birth)) {
+      window.alert(
+        '생년월일 형식이 맞지 않습니다. 19991111 형식으로 입력하세요.',
+      );
+    }
+
     dispatch(
       infoActions.myInfo({
         name: name,
