@@ -13,7 +13,7 @@ jobs: # Job 설정
   build:
     runs-on: ubuntu-18.04 # Job 가상환경 인스턴스
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@main
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
