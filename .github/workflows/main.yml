@@ -1,17 +1,12 @@
-name: React build # Workflow 이름
-# Event 감지
+name: React build
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-# main branch에서 push 이벤트가 일어났을 때만 실행
 
-jobs: # Job 설정
+jobs:
   build:
-    runs-on: ubuntu-latest # Job 가상환경 인스턴스
+    runs-on: ubuntu-18.04
     steps:
       - name: Checkout main
         uses: actions/checkout@main
