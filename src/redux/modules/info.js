@@ -1,5 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
+import axios from 'axios';
+import { config } from '../../config';
 
 // 액션
 const MYBLOOD = 'MYBLOOD';
@@ -33,10 +35,38 @@ const initialState = {
 
 const resultInfoDB = () => {
   return function (dispatch, getState, { history }) {
-    dispatch(resultInfo());
-    setTimeout(() => {
-      history.push('/result');
-    }, 700);
+    const myInfo = getState().info.myInfo;
+    const yourInfo = getState().info.yourInfo;
+    axios({
+      method: 'post',
+      url: `${config.api}/judgment`,
+      data: {
+        me: {
+          name: myInfo.name,
+          gender: myInfo.gender,
+          blood: myInfo.blood,
+          mbti: myInfo.mbti,
+          born: myInfo.birth,
+        },
+        you: {
+          name: yourInfo.name,
+          gender: yourInfo.gender,
+          blood: yourInfo.blood,
+          mbti: yourInfo.mbti,
+          born: yourInfo.birth,
+        },
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        dispatch(resultInfo());
+      })
+      .then(() => {
+        history.push('/result');
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 };
 

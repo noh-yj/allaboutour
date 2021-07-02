@@ -12,7 +12,7 @@ import { nameCheck, birthCheck } from '../shared/exp';
 
 function YourInfo(props) {
   const [name, setName] = useState('');
-  const [sex, setSex] = useState('남');
+  const [gender, setGender] = useState('male');
   const [birth, setBirth] = useState('');
   const [bloodModal, setBloodModal] = useState(false);
   const [mbtiModal, setMbtiModal] = useState(false);
@@ -29,7 +29,7 @@ function YourInfo(props) {
 
   // 성별 상태
   const onChangeSex = (e) => {
-    setSex(e.target.value);
+    setGender(e.target.value);
   };
 
   // 생년월일 상태
@@ -65,7 +65,7 @@ function YourInfo(props) {
     dispatch(
       infoActions.yourInfo({
         name: name,
-        sex: sex,
+        gender: gender,
         birth: birth,
         blood: yourBlood,
         mbti: yourMbti,
@@ -109,11 +109,11 @@ function YourInfo(props) {
               </SortWrap>
               <SortWrap>
                 <Text>성별</Text>
-                <Radio.Group onChange={onChangeSex} value={sex}>
-                  <Radio value={'남'} style={{ marginRight: '70px' }}>
+                <Radio.Group onChange={onChangeSex} value={gender}>
+                  <Radio value={'male'} style={{ marginRight: '70px' }}>
                     남
                   </Radio>
-                  <Radio value={'여'}>여</Radio>
+                  <Radio value={'female'}>여</Radio>
                 </Radio.Group>
               </SortWrap>
               <SortWrap>

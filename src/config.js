@@ -1,5 +1,5 @@
 const config = {
-  api: '',
+  api: 'http://3.36.65.189',
 };
 
 export { config };
