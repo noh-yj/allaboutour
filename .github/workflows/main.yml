@@ -31,7 +31,8 @@ jobs: # Job 설정
         run: yarn install
 
       - name: Build # React Build
-        run: npm build
+        run: npm run-script build
+        
       - name: Deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
