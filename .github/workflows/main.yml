@@ -31,7 +31,7 @@ jobs: # Job 설정
         run: yarn install
 
       - name: Build # React Build
-        run: npm run-script build
+        run: yarn build
         
       - name: Deploy
         env:
