@@ -46,7 +46,7 @@ function MyInfo(props) {
       return;
     }
 
-    if (name.length <= 10) {
+    if (name.length > 10) {
       Swal.fire({
         text: '이름은 10글자 이내로 입력해주세요.',
         icon: 'warning',
