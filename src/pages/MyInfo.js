@@ -8,7 +8,7 @@ import BloodModal from '../components/BloodModal';
 import MBTIModal from '../components/MBTIModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as infoActions } from '../redux/modules/info';
-import { nameCheck, birthCheck } from '../shared/exp';
+import { birthCheck } from '../shared/exp';
 
 function MyInfo(props) {
   const [name, setName] = useState('');
@@ -46,9 +46,9 @@ function MyInfo(props) {
       return;
     }
 
-    if (!nameCheck(name)) {
+    if (name.length <= 10) {
       Swal.fire({
-        text: '이름 형식이 옳바르지 않습니다. \n한글2~4자 또는 영문2~10자 이내로 입력하세요.',
+        text: '이름은 10글자 이내로 입력해주세요.',
         icon: 'warning',
       });
       return;
