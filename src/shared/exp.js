@@ -1,11 +1,4 @@
-// 정규식 처리 이름, 생년월일
-
-// 이름 한글 2~4자 이내, 영문 2~10자 이내 혼용 x
-export const nameCheck = (name) => {
-  let reg = /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
-
-  return reg.test(name);
-};
+// 정규식 처리 생년월일
 
 // 생년월일 8자
 export const birthCheck = (birth) => {
