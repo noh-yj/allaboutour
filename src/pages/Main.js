@@ -2,9 +2,14 @@ import axios from 'axios';
 import React from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
+import { InfoCircleOutlined } from '@ant-design/icons';
 import Button from '../Elements/Button';
 import { config } from '../config';
 import { useState } from 'react';
+import InfoModal from '../components/InfoModal';
+import BackGround from '../shared/img/bg.jpg';
+import heart from '../shared/img/100.png';
+import font from '../shared/font/font.ttf';
 
 function Main(props) {
   const [count, setCount] = useState(0);
@@ -26,22 +31,38 @@ function Main(props) {
       });
   }, []);
 
+  const [infoModal, setInfoModal] = useState(false);
+
+  const OpenInfoModal = () => {
+    setInfoModal(true);
+  };
+  const CloseInfoModal = () => {
+    setInfoModal(false);
+  };
+
   return (
     <>
       <Container>
         <Wrap>
           <header>
-            <Title>인간 궁합</Title>
+            <InfoWrap onClick={OpenInfoModal}>
+              <InfoCircleOutlined style={{ fontSize: '20px' }} />
+            </InfoWrap>
+            <Title>우리의 모든 것</Title>
             <SubTitle>
-              설명설명설명설명설명
-              <br /> 설명설명설명설명 확인해보세요!
+              <span>
+                설명설명설명설명설명
+                <br /> 설명설명설명설명 확인해보세요!
+              </span>
             </SubTitle>
           </header>
           <main>
-            <Img
-              src='https://afterwork-webservice-static.s3.ap-northeast-2.amazonaws.com/logo/default_image.jpg'
-              alt='img'
-            />
+            <ImgWrap>
+              <Img src={heart} alt='img' />
+            </ImgWrap>
+            <Member>
+              현재까지 <strong>{count}명</strong>이 참여했어요
+            </Member>
             <BtnWrap>
               <Button startBtn _onClick={start}>
                 시작하기
@@ -49,11 +70,9 @@ function Main(props) {
               <Button>테스트 공유</Button>
             </BtnWrap>
           </main>
-          <Footer>
-            현재까지 <strong>{count}명</strong>이 참여했어요
-          </Footer>
         </Wrap>
       </Container>
+      <InfoModal status={infoModal} close={CloseInfoModal} />
     </>
   );
 }
@@ -62,52 +81,78 @@ const Container = styled.div`
   max-width: 375px;
   margin: 0 auto;
   cursor: default;
+  background-image: url(${BackGround});
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
+  @media only screen and (max-width: 414px) {
+    max-width: 414px;
+  }
+  @media only screen and (max-width: 375px) {
+    max-width: 375px;
+  }
 `;
 
 const Wrap = styled.div`
   margin: 0 17px;
 `;
 
+const InfoWrap = styled.div`
+  position: absolute;
+  top: 47px;
+  left: 325px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+`;
+
 const Title = styled.h1`
-  text-align: left;
-  font: normal normal normal 30px/43px AppleSDGothicNeoEB00;
+  text-align: center;
+  font: normal normal normal 40px/46px ${font};
   letter-spacing: 0px;
   color: #333333;
   margin: 0;
-  font-weight: 800;
   display: block;
-  padding-top: 95px;
+  padding-top: 111px;
 `;
-const SubTitle = styled.span`
-  margin-top: 26px;
-  max-width: 180px;
-  display: inline-block;
-  text-align: left;
-  font: normal normal normal 14px/20px AppleSDGothicNeoM00;
-  letter-spacing: 0px;
-  color: #999999;
+const SubTitle = styled.div`
+  text-align: center;
+  & span {
+    margin-top: 19px;
+    max-width: 190px;
+    display: inline-block;
+    text-align: center;
+    font: normal normal normal 15px/22px AppleSDGothicNeoM00;
+    letter-spacing: 0px;
+    color: #999999;
+  }
+`;
+
+const ImgWrap = styled.div`
+  width: 250px;
+  margin: 0 auto;
 `;
 
 const Img = styled.img`
-  margin-top: 45px;
-  width: 341px;
-  height: 270px;
-  border: 1px solid #707070;
+  margin-top: 39px;
+  width: 250px;
+  height: 250px;
   opacity: 1;
 `;
 
-const BtnWrap = styled.div`
-  margin-top: 50px;
-  width: 100%;
-`;
-
-const Footer = styled.footer`
+const Member = styled.div`
   font-size: 16px;
   color: #333;
   letter-spacing: 0;
   text-align: center;
-  margin-top: 33px;
-  padding-bottom: 85px;
+  margin-top: 19px;
+  margin-bottom: 80px;
+`;
+
+const BtnWrap = styled.div`
+  text-align: center;
+  width: 100%;
 `;
 
 export default Main;

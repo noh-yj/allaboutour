@@ -9,6 +9,7 @@ import MBTIModal from '../components/MBTIModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as infoActions } from '../redux/modules/info';
 import { birthCheck } from '../shared/exp';
+import BackGround from '../shared/img/bg.jpg';
 
 function YourInfo(props) {
   const [name, setName] = useState('');
@@ -111,16 +112,16 @@ function YourInfo(props) {
               <SortWrap>
                 <Text>성별</Text>
                 <Radio.Group onChange={onChangeSex} value={gender}>
-                  <Radio value={'male'} style={{ marginRight: '70px' }}>
+                  <Radio value={'male'} style={{ marginRight: '58px' }}>
                     남
                   </Radio>
                   <Radio value={'female'}>여</Radio>
                 </Radio.Group>
               </SortWrap>
               <SortWrap>
-                <Text>생년월일</Text>
+                <Text birth>생년월일</Text>
                 <Input
-                  placeholder='8자리를 입력해주세요 ex)19991111'
+                  placeholder='8자리를 입력해주세요'
                   bordered={false}
                   onChange={onChangeBirth}
                   maxLength={8}
@@ -132,7 +133,7 @@ function YourInfo(props) {
                   {yourBlood === '' ? '혈액형을 입력해주세요' : yourBlood}
                 </Modal>
               </SortWrap>
-              <SortWrap>
+              <SortWrap findMbti>
                 <Text>MBTI</Text>
                 <Modal onClick={OpenMbtiModal} isBoolean={Boolean(yourMbti)}>
                   {yourMbti === '' ? '혈액형을 입력해주세요' : yourMbti}
@@ -148,13 +149,12 @@ function YourInfo(props) {
                   MBTI 검사하기
                 </a>
               </FindMBTI>
-
-              <BtnWrap>
-                <Button startBtn _onClick={result}>
-                  결과보기
-                </Button>
-              </BtnWrap>
             </main>
+            <BtnWrap>
+              <Button startBtn _onClick={result}>
+                결과보기
+              </Button>
+            </BtnWrap>
           </Wrap>
         </Container>
         <BloodModal status={bloodModal} close={CloseBloodModal} />
@@ -168,18 +168,33 @@ const Container = styled.div`
   max-width: 375px;
   margin: 0 auto;
   cursor: default;
+  background-image: url(${BackGround});
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  @media only screen and (max-width: 414px) {
+    max-width: 414px;
+  }
+  @media only screen and (max-width: 375px) {
+    max-width: 375px;
+  }
 `;
 
 const Wrap = styled.div`
   margin: 0 17px;
   & main {
-    margin-top: 83px;
+    margin-top: 22.5px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 10px #00000012;
+    border: 1px solid #f1f1f1;
+    border-radius: 13px;
+    padding: 46px 23px 36px;
   }
 `;
 
 const SortWrap = styled.div`
   padding-bottom: 11px;
-  margin-bottom: 50px;
+  margin-bottom: ${(props) => (props.findMbti ? '20px' : '40px')};
   border-bottom: 1px solid #e4e4e4;
   display: flex;
   align-items: center;
@@ -197,9 +212,9 @@ const Text = styled.span`
   font: normal normal normal 17px/19px AppleSDGothicNeoB00;
   letter-spacing: 0px;
   color: #333333;
-  width: 60px;
+  width: ${(props) => (props.birth ? '90px' : '60px')};
   display: inline-block;
-  margin-right: 30px;
+  margin-right: ${(props) => (props.birth ? '20px' : '30px')};
   font-weight: 700;
 `;
 
@@ -231,9 +246,10 @@ const FindMBTI = styled.div`
 `;
 
 const BtnWrap = styled.div`
-  margin-top: 74px;
+  margin-top: 36px;
   width: 100%;
-  height: 139px;
+  height: 100px;
+  text-align: center;
 `;
 
 export default YourInfo;

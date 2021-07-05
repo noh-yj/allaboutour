@@ -5,6 +5,7 @@ import ProgressBar from '../components/ProgressBar';
 import ResultInfo from '../components/ResultInfo';
 import Button from '../Elements/Button';
 import { actionCreators as infoActions } from '../redux/modules/info';
+import BackGround from '../shared/img/bg.jpg';
 
 function Result(props) {
   const dispatch = useDispatch();
@@ -22,8 +23,10 @@ function Result(props) {
           <ResultInfo text='결과 해석' />
 
           <BtnWrap>
-            <Button _onClick={main}>다시하기</Button>
-            <Button startBtn>결과 링크 공유하기</Button>
+            <Button startBtn _onClick={main}>
+              다시하기
+            </Button>
+            <Button>결과 링크 공유하기</Button>
           </BtnWrap>
         </Wrap>
       </Container>
@@ -34,7 +37,18 @@ function Result(props) {
 const Container = styled.div`
   max-width: 375px;
   margin: 0 auto;
+  padding-top: 24px;
   cursor: default;
+  background-image: url(${BackGround});
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  @media only screen and (max-width: 414px) {
+    max-width: 414px;
+  }
+  @media only screen and (max-width: 375px) {
+    max-width: 375px;
+  }
 `;
 
 const Wrap = styled.div`
@@ -45,6 +59,7 @@ const BtnWrap = styled.div`
   margin-top: 60px;
   width: 100%;
   height: 180px;
+  text-align: center;
 `;
 
 export default Result;

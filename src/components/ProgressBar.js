@@ -1,13 +1,21 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Progress } from 'antd';
 import ImgResult from '../components/ImgResult';
+import heart from '../shared/img/heart.svg';
 
 function ProgressBar() {
   const resultInfo = useSelector((state) => state.info.resultInfo.result);
 
   const score = resultInfo.score;
+  // 별자리
+  const zodiacSignScore = resultInfo.individuallyScore.zodiacSignScore;
+  // 12지신
+  const constellationScore = resultInfo.individuallyScore.constellationScore;
+  // 혈액형
+  const bloodScore = resultInfo.individuallyScore.bloodScore;
+  // mbti
+  const mbtiScore = resultInfo.individuallyScore.mbtiScore;
 
   return (
     <>
@@ -17,20 +25,18 @@ function ProgressBar() {
           <h1>{score}점</h1>
         </TextWrap>
         <ProgressWrap>
-          <Progress
-            strokeColor={{
-              '0%': '#C2C2C2',
-              '100%': '#eee',
-            }}
-            percent={score}
-            showInfo={false}
-          />
+          <Progress>
+            <HighLight width={(score / 100) * 100 + '%'}></HighLight>
+            <Dot />
+            <Heart />
+          </Progress>
         </ProgressWrap>
+
         <ImgWrap>
-          <ImgResult text='별자리' />
-          <ImgResult text='12지신' />
-          <ImgResult text='혈액형' />
-          <ImgResult text='MBTI' />
+          <ImgResult text='별자리' score={zodiacSignScore} />
+          <ImgResult text='12지신' score={constellationScore} />
+          <ImgResult text='혈액형' score={bloodScore} />
+          <ImgResult text='MBTI' score={mbtiScore} />
         </ImgWrap>
       </Wrap>
     </>
@@ -39,11 +45,12 @@ function ProgressBar() {
 
 const Wrap = styled.main`
   width: 341px;
-  height: 401px;
+  height: 370px;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 10px #00000012;
   border-radius: 13px;
   position: relative;
+  margin: 0 auto;
 `;
 const TextWrap = styled.div`
   position: absolute;
@@ -71,6 +78,42 @@ const ProgressWrap = styled.div`
   top: 170px;
   left: 25px;
   width: 291px;
+`;
+
+const Progress = styled.div`
+  background: #cfcfcf;
+  width: 100%;
+  height: 7px;
+  display: flex;
+  border-radius: 14px;
+  align-items: center;
+`;
+
+const HighLight = styled.div`
+  background: #333;
+  width: ${(props) => props.width};
+  height: 7px;
+  border-radius: 14px;
+  transition: 2s;
+`;
+
+const Dot = styled.div`
+  background: #fff;
+  border: 1px solid #707070;
+  box-sizing: border-box;
+  margin: 0px 0px 0px -12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+`;
+
+const Heart = styled.div`
+  background-image: url(${heart});
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 21px;
+  height: 20px;
+  margin: -50px 0px 0px -16px;
 `;
 
 const ImgWrap = styled.div`
