@@ -2,16 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 function ImgResult(props) {
-  const { text } = props;
+  const { text, score } = props;
   return (
     <>
       <ImgWrap>
-        <Text isTitle>{text}</Text>
         <img
           src='https://afterwork-webservice-static.s3.ap-northeast-2.amazonaws.com/logo/default_image.jpg'
           alt='img'
         />
-        <Text>00점</Text>
+        <Text isTitle>{text}</Text>
+        <Text>{score}점</Text>
       </ImgWrap>
     </>
   );
@@ -27,7 +27,7 @@ const ImgWrap = styled.div`
 `;
 
 const Text = styled.p`
-  margin: 8px 0;
+  margin: ${(props) => (props.isTitle ? '8px 0 0' : '0')};
   text-align: center;
   font: normal normal normal 13px/19px AppleSDGothicNeoB00;
   letter-spacing: 0px;
