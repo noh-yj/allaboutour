@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import axios from 'axios';
 import { config } from '../../config';
+import Swal from 'sweetalert2';
 
 // 액션
 const MYBLOOD = 'MYBLOOD';
@@ -58,14 +59,20 @@ const resultInfoDB = () => {
       },
     })
       .then((res) => {
-        console.log(res);
-        dispatch(resultInfo());
+        dispatch(resultInfo(res.data));
       })
       .then(() => {
         history.push('/result');
       })
       .catch((e) => {
-        console.log(e);
+        console.error(e);
+        Swal.fire({
+          title: '에러가 발생했습니다. 다시 시도해주세요 😭',
+          icon: 'error',
+        });
+        // .then(() => {
+        //   history.replace('/')
+        // })
       });
   };
 };

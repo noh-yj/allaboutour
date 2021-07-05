@@ -1,12 +1,30 @@
+import axios from 'axios';
 import React from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../Elements/Button';
+import { config } from '../config';
+import { useState } from 'react';
 
 function Main(props) {
+  const [count, setCount] = useState(0);
   const start = () => {
     window.scrollTo({ top: 0, left: 0 });
     props.history.push('/myProfile');
   };
+
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `${config.api}/count`,
+    })
+      .then((res) => {
+        setCount(res.data.result.count);
+      })
+      .catch((e) => {
+        console.log('error', e);
+      });
+  }, []);
 
   return (
     <>
@@ -32,7 +50,7 @@ function Main(props) {
             </BtnWrap>
           </main>
           <Footer>
-            현재까지 <strong>1234명</strong>이 참여했어요
+            현재까지 <strong>{count}명</strong>이 참여했어요
           </Footer>
         </Wrap>
       </Container>

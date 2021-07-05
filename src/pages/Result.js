@@ -13,6 +13,7 @@ function Result(props) {
     window.scrollTo({ top: 0, left: 0 });
     props.history.push('/');
   };
+
   return (
     <>
       <Container>

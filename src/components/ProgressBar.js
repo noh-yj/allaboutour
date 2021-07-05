@@ -1,15 +1,20 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Progress } from 'antd';
 import ImgResult from '../components/ImgResult';
 
 function ProgressBar() {
+  const resultInfo = useSelector((state) => state.info.resultInfo.result);
+
+  const score = resultInfo.score;
+
   return (
     <>
       <Wrap>
         <TextWrap>
           <p>나와 상대의 궁합은</p>
-          <h1>99점</h1>
+          <h1>{score}점</h1>
         </TextWrap>
         <ProgressWrap>
           <Progress
@@ -17,7 +22,7 @@ function ProgressBar() {
               '0%': '#C2C2C2',
               '100%': '#eee',
             }}
-            percent={99}
+            percent={score}
             showInfo={false}
           />
         </ProgressWrap>
