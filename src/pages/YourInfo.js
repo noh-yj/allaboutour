@@ -20,6 +20,7 @@ function YourInfo(props) {
   const dispatch = useDispatch();
 
   const yourBlood = useSelector((state) => state.info.yourBlood);
+  const bloodInfo = yourBlood.split('형')[0];
   const yourMbti = useSelector((state) => state.info.yourMbti);
 
   // 이름 상태
@@ -66,8 +67,8 @@ function YourInfo(props) {
       infoActions.yourInfo({
         name: name,
         gender: gender,
-        birth: birth,
-        blood: yourBlood,
+        birth: Number(birth),
+        blood: bloodInfo,
         mbti: yourMbti,
       }),
     );
