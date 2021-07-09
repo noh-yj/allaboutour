@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Title from '../Elements/Title';
 import Button from '../Elements/Button';
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as infoActions } from '../redux/modules/info';
 import { birthCheck } from '../shared/exp';
 import BackGround from '../shared/img/bg.jpg';
+import { history } from '../redux/configureStore';
 
 function YourInfo(props) {
   const [name, setName] = useState('');
@@ -19,6 +20,14 @@ function YourInfo(props) {
   const [mbtiModal, setMbtiModal] = useState(false);
 
   const dispatch = useDispatch();
+
+  const myInfoCheck = useSelector((state) => state.info.myInfo);
+  useEffect(() => {
+    if (Object.keys(myInfoCheck).length === 0) {
+      history.replace('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const yourBlood = useSelector((state) => state.info.yourBlood);
   const bloodInfo = yourBlood.split('형')[0];

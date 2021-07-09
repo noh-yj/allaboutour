@@ -69,10 +69,10 @@ const resultInfoDB = () => {
         Swal.fire({
           title: '에러가 발생했습니다. 다시 시도해주세요 😭',
           icon: 'error',
+        }).then(() => {
+          history.replace('/');
+          dispatch(clearInfo());
         });
-        // .then(() => {
-        //   history.replace('/')
-        // })
       });
   };
 };

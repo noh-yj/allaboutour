@@ -1,17 +1,18 @@
+import React, { useState } from 'react';
 import axios from 'axios';
-import React from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import Button from '../Elements/Button';
 import { config } from '../config';
-import { useState } from 'react';
 import InfoModal from '../components/InfoModal';
 import BackGround from '../shared/img/bg.jpg';
 import heart from '../shared/img/100.png';
-import font from '../shared/font/font.ttf';
+import { useDispatch } from 'react-redux';
+import { actionCreators as infoActions } from '../redux/modules/info';
 
 function Main(props) {
+  const dispatch = useDispatch();
   const [count, setCount] = useState(0);
   const start = () => {
     window.scrollTo({ top: 0, left: 0 });
@@ -19,6 +20,7 @@ function Main(props) {
   };
 
   useEffect(() => {
+    dispatch(infoActions.clearInfo());
     axios({
       method: 'get',
       url: `${config.api}/count`,
@@ -29,6 +31,7 @@ function Main(props) {
       .catch((e) => {
         console.log('error', e);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [infoModal, setInfoModal] = useState(false);
@@ -109,7 +112,8 @@ const InfoWrap = styled.div`
 
 const Title = styled.h1`
   text-align: center;
-  font: normal normal normal 40px/46px ${font};
+  font-size: 40px;
+  font-family: 'Nanum BaReunHiPi';
   letter-spacing: 0px;
   color: #333333;
   margin: 0;

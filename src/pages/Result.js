@@ -1,14 +1,24 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ProgressBar from '../components/ProgressBar';
 import ResultInfo from '../components/ResultInfo';
 import Button from '../Elements/Button';
+import { history } from '../redux/configureStore';
 import { actionCreators as infoActions } from '../redux/modules/info';
 import BackGround from '../shared/img/bg.jpg';
 
 function Result(props) {
   const dispatch = useDispatch();
+  const resultInfo = useSelector((state) => state.info.resultInfo);
+
+  useEffect(() => {
+    if (Object.keys(resultInfo).length === 0) {
+      history.replace('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const main = () => {
     dispatch(infoActions.clearInfo());
     window.scrollTo({ top: 0, left: 0 });
