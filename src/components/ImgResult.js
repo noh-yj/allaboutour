@@ -2,14 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 function ImgResult(props) {
-  const { text, score } = props;
+  const { text, score, img } = props;
   return (
     <>
       <ImgWrap>
-        <img
-          src='https://afterwork-webservice-static.s3.ap-northeast-2.amazonaws.com/logo/default_image.jpg'
-          alt='img'
-        />
+        <img src={img} alt='img' />
         <Text isTitle>{text}</Text>
         <Text>{score}점</Text>
       </ImgWrap>

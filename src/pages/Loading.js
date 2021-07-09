@@ -1,14 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as infoActions } from '../redux/modules/info';
 import BackGround from '../shared/img/bg.jpg';
 import Img from '../shared/img/90.png';
+import { history } from '../redux/configureStore';
 
 function Loading() {
   const dispatch = useDispatch();
+  const myInfoCheck = useSelector((state) => state.info.myInfo);
+  const yourInfoCheck = useSelector((state) => state.info.yourInfo);
   useEffect(() => {
+    if (
+      Object.keys(myInfoCheck).length === 0 ||
+      Object.keys(yourInfoCheck).length === 0
+    ) {
+      history.replace('/');
+      return;
+    }
     dispatch(infoActions.resultInfoDB());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -46,7 +56,7 @@ const Image = styled.img`
 const Text = styled.p`
   position: absolute;
   top: 445px;
-  left: 127px;
+  left: 110px;
   text-align: left;
   font: normal normal normal 20px/23px Nanum BaReunHiPi;
   letter-spacing: 0px;

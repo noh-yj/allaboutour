@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import font from '../shared/font/font.ttf';
 
 function Title(props) {
   const { children } = props;
@@ -15,7 +14,8 @@ function Title(props) {
 
 const H1 = styled.h1`
   text-align: left;
-  font: normal normal normal 32px/36px ${font};
+  font: normal normal normal 32px/36px;
+  font-family: 'Nanum BaReunHiPi';
   letter-spacing: 0px;
   color: #333333;
   opacity: 1;

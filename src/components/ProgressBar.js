@@ -5,40 +5,55 @@ import ImgResult from '../components/ImgResult';
 import heart from '../shared/img/heart.svg';
 
 function ProgressBar() {
-  const resultInfo = useSelector((state) => state.info.resultInfo.result);
+  const resultInfo = useSelector((state) => state.info?.resultInfo.result);
 
-  const score = resultInfo.score;
+  const score = resultInfo?.score;
+
   // 별자리
-  const zodiacSignScore = resultInfo.individuallyScore.zodiacSignScore;
+  const zodiacSignScore = resultInfo?.individuallyScore.zodiacSignScore;
+  const zodiacSignImg = resultInfo?.img.zodiacSignImg;
   // 12지신
-  const constellationScore = resultInfo.individuallyScore.constellationScore;
+  const constellationScore = resultInfo?.individuallyScore.constellationScore;
+  const constellationImg = resultInfo?.img.constellationImg;
   // 혈액형
-  const bloodScore = resultInfo.individuallyScore.bloodScore;
+  const bloodScore = resultInfo?.individuallyScore.bloodScore;
+  const bloodImg = resultInfo?.img.bloodImg;
   // mbti
-  const mbtiScore = resultInfo.individuallyScore.mbtiScore;
+  const mbtiScore = resultInfo?.individuallyScore.mbtiScore;
+  const mbtiImg = resultInfo?.img.mbtiImg;
 
   return (
     <>
-      <Wrap>
-        <TextWrap>
-          <p>나와 상대의 궁합은</p>
-          <h1>{score}점</h1>
-        </TextWrap>
-        <ProgressWrap>
-          <Progress>
-            <HighLight width={(score / 100) * 100 + '%'}></HighLight>
-            <Dot />
-            <Heart />
-          </Progress>
-        </ProgressWrap>
+      {resultInfo && (
+        <Wrap>
+          <TextWrap>
+            <p>나와 상대의 궁합은</p>
+            <h1>{score}점</h1>
+          </TextWrap>
+          <ProgressWrap>
+            <Progress>
+              <HighLight width={(score / 100) * 100 + '%'}></HighLight>
+              <Dot />
+              <Heart />
+            </Progress>
+          </ProgressWrap>
 
-        <ImgWrap>
-          <ImgResult text='별자리' score={zodiacSignScore} />
-          <ImgResult text='12지신' score={constellationScore} />
-          <ImgResult text='혈액형' score={bloodScore} />
-          <ImgResult text='MBTI' score={mbtiScore} />
-        </ImgWrap>
-      </Wrap>
+          <ImgWrap>
+            <ImgResult
+              text='별자리'
+              score={zodiacSignScore}
+              img={zodiacSignImg}
+            />
+            <ImgResult
+              text='12지신'
+              score={constellationScore}
+              img={constellationImg}
+            />
+            <ImgResult text='혈액형' score={bloodScore} img={bloodImg} />
+            <ImgResult text='MBTI' score={mbtiScore} img={mbtiImg} />
+          </ImgWrap>
+        </Wrap>
+      )}
     </>
   );
 }

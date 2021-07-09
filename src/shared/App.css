@@ -1,2 +1,4 @@
 /* antd import */
 @import "~antd/dist/antd.css";
+
+@font-face { font-family: 'Nanum BaReunHiPi'; src: url(./font/font.ttf) format('ttf'); }
