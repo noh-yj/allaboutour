@@ -7,6 +7,7 @@ import Button from '../Elements/Button';
 import { history } from '../redux/configureStore';
 import { actionCreators as infoActions } from '../redux/modules/info';
 import BackGround from '../shared/img/bg.jpg';
+import { message } from 'antd';
 
 function Result(props) {
   const dispatch = useDispatch();
@@ -25,6 +26,12 @@ function Result(props) {
     props.history.push('/');
   };
 
+  const url = window.location.origin;
+  const copy = () => {
+    navigator.clipboard.writeText(url);
+    message.success('링크가 클립보드에 복사되었습니다.');
+  };
+
   return (
     <>
       <Container>
@@ -36,7 +43,7 @@ function Result(props) {
             <Button startBtn _onClick={main}>
               다시하기
             </Button>
-            <Button>결과 링크 공유하기</Button>
+            <Button _onClick={copy}>링크 공유하기</Button>
           </BtnWrap>
         </Wrap>
       </Container>

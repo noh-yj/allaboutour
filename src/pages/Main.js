@@ -10,6 +10,7 @@ import BackGround from '../shared/img/bg.jpg';
 import heart from '../shared/img/100.png';
 import { useDispatch } from 'react-redux';
 import { actionCreators as infoActions } from '../redux/modules/info';
+import { message } from 'antd';
 
 function Main(props) {
   const dispatch = useDispatch();
@@ -43,6 +44,12 @@ function Main(props) {
     setInfoModal(false);
   };
 
+  const url = window.location.origin;
+  const copy = () => {
+    navigator.clipboard.writeText(url);
+    message.success('링크가 클립보드에 복사되었습니다.');
+  };
+
   return (
     <>
       <Container>
@@ -54,8 +61,9 @@ function Main(props) {
             <Title>우리의 모든 것</Title>
             <SubTitle>
               <span>
-                설명설명설명설명설명
-                <br /> 설명설명설명설명 확인해보세요!
+                mbti 별자리 띠 혈액형
+                <br />
+                모든 궁합을 한번에 확인해보세요!
               </span>
             </SubTitle>
           </header>
@@ -70,7 +78,7 @@ function Main(props) {
               <Button startBtn _onClick={start}>
                 시작하기
               </Button>
-              <Button>테스트 공유</Button>
+              <Button _onClick={copy}>테스트 공유</Button>
             </BtnWrap>
           </main>
         </Wrap>
@@ -124,7 +132,7 @@ const SubTitle = styled.div`
   text-align: center;
   & span {
     margin-top: 19px;
-    max-width: 190px;
+    max-width: 200px;
     display: inline-block;
     text-align: center;
     font: normal normal normal 15px/22px AppleSDGothicNeoM00;

@@ -17,40 +17,12 @@ function Info(props) {
               </div>
               <br />
               <div>
-                <span>
-                  <strong>출처</strong> : <br />
-                  <a
-                    href='https://www.youtube.com/watch?v=9ifq-L7Fytg'
-                    target='_blank'
-                    rel='noreferrer noopener'
-                  >
-                    - MBTI 유형별 궁합
-                  </a>
-                  <br />
-                  <a
-                    href='https://www.youtube.com/watch?v=9ifq-L7Fytg'
-                    target='_blank'
-                    rel='noreferrer noopener'
-                  >
-                    - INTJ 와 INFP 궁합
-                  </a>
-                  <br />
-                  <a
-                    href='http://www.idotong.com/data/gunghab/gunghab.html'
-                    target='_blank'
-                    rel='noreferrer noopener'
-                  >
-                    - 별자리 궁합
-                  </a>{' '}
-                  <br />
-                  <a
-                    href='https://terms.naver.com/entry.naver?docId=561476&cid=46670&categoryId=46670'
-                    target='_blank'
-                    rel='noreferrer noopener'
-                  >
-                    - 네이버 지식백과 '쥐띠'
-                  </a>
-                </span>
+                <strong>출처</strong> : <br />
+                <span>- MBTI 유형별 궁합</span>
+                <br />
+                <span>- 네이버 지식백과</span>
+                <br />
+                <span>- 별자리 궁합표</span>
               </div>
             </main>
           </ModalContainer>
@@ -99,9 +71,7 @@ const ModalContainer = styled.div`
       text-align: left;
       font: normal normal normal 15px/23px AppleSDGothicNeoM00;
       letter-spacing: 0px;
-      & a {
-        color: #333333;
-      }
+      cursor: default;
     }
   }
 `;
