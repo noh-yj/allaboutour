@@ -40,10 +40,10 @@ function ResultInfo(props) {
                 {mbtiResult}
                 <br />
                 <br />
-                {zodiacSignResult}
-                <br />
-                <br />
                 {bloodResult}
+                <br />
+                <br />
+                {zodiacSignResult}
                 <br />
                 <br />
                 {constellationResult}
