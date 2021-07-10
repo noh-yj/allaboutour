@@ -12,7 +12,7 @@ function Info(props) {
             <main>
               <div>
                 <span>
-                  <strong>문의</strong> : eaydkv112@naver.com
+                  <strong>문의</strong> : ehdaydkv112@naver.com
                 </span>
               </div>
               <br />

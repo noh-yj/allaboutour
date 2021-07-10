@@ -14,21 +14,20 @@ function ResultInfo(props) {
   const mbtiResult = resultInfo?.content.mbti
     .replace(/me/gi, meName)
     .replace(/you/gi, youName);
-
-  // 12지신
-  const constellationResult = resultInfo?.content.constellation
-    .replace(/me/gi, meName)
-    .replace(/you/gi, youName);
-  // 혈액형
-  const bloodResult = resultInfo?.content.blood
-    .replace(/me/gi, meName)
-    .replace(/you/gi, youName);
-
   // 별자리
   const zodiacSignResult = resultInfo?.content.zodiacSign
     .replace(/me/gi, meName)
     .replace(/you/gi, youName);
 
+  // 혈액형
+  const bloodResult = resultInfo?.content.blood
+    .replace(/me/gi, meName)
+    .replace(/you/gi, youName);
+
+  // 12지신
+  const constellationResult = resultInfo?.content.constellation
+    .replace(/me/gi, meName)
+    .replace(/you/gi, youName);
   return (
     <>
       {resultInfo && (
@@ -41,13 +40,13 @@ function ResultInfo(props) {
                 {mbtiResult}
                 <br />
                 <br />
-                {constellationResult}
+                {zodiacSignResult}
                 <br />
                 <br />
                 {bloodResult}
                 <br />
                 <br />
-                {zodiacSignResult}
+                {constellationResult}
               </span>
             </TextWrap>
           </Container>
