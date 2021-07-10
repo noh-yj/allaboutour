@@ -8,6 +8,7 @@ import { history } from '../redux/configureStore';
 import { actionCreators as infoActions } from '../redux/modules/info';
 import BackGround from '../shared/img/bg.jpg';
 import { message } from 'antd';
+import { copyToClipboard } from '../shared/exp';
 
 function Result(props) {
   const dispatch = useDispatch();
@@ -28,8 +29,13 @@ function Result(props) {
 
   const url = window.location.origin;
   const copy = () => {
-    navigator.clipboard.writeText(url);
-    message.success('링크가 클립보드에 복사되었습니다.');
+    copyToClipboard(url)
+      .then(() => {
+        message.success('링크가 클립보드에 복사되었습니다.');
+      })
+      .catch(() => {
+        message.error('에러가 발생했습니다! 다시시도해주세요.');
+      });
   };
 
   return (
