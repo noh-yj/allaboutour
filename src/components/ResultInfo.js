@@ -14,7 +14,8 @@ function ResultInfo(props) {
   const mbtiResult = resultInfo?.content.mbti
     .replace(/me/gi, meName)
     .replace(/you/gi, youName);
-  // 별자리
+
+  // 12지신
   const zodiacSignResult = resultInfo?.content.zodiacSign
     .replace(/me/gi, meName)
     .replace(/you/gi, youName);
@@ -24,7 +25,7 @@ function ResultInfo(props) {
     .replace(/me/gi, meName)
     .replace(/you/gi, youName);
 
-  // 12지신
+  // 별자리
   const constellationResult = resultInfo?.content.constellation
     .replace(/me/gi, meName)
     .replace(/you/gi, youName);

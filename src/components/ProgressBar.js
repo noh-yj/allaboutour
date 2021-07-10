@@ -10,10 +10,11 @@ function ProgressBar() {
   const score = resultInfo?.score;
   const averageScore = Math.round(score);
 
-  // 별자리
+  // 12지신
   const zodiacSignScore = resultInfo?.individuallyScore.zodiacSignScore;
   const zodiacSignImg = resultInfo?.img.zodiacSignImg;
-  // 12지신
+
+  // 별자리
   const constellationScore = resultInfo?.individuallyScore.constellationScore;
   const constellationImg = resultInfo?.img.constellationImg;
   // 혈액형
@@ -42,13 +43,13 @@ function ProgressBar() {
           <ImgWrap>
             <ImgResult
               text='별자리'
-              score={zodiacSignScore}
-              img={zodiacSignImg}
+              score={constellationScore}
+              img={constellationImg}
             />
             <ImgResult
               text='12지신'
-              score={constellationScore}
-              img={constellationImg}
+              score={zodiacSignScore}
+              img={zodiacSignImg}
             />
             <ImgResult text='혈액형' score={bloodScore} img={bloodImg} />
             <ImgResult text='MBTI' score={mbtiScore} img={mbtiImg} />
