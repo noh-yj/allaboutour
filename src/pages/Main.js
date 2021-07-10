@@ -7,7 +7,6 @@ import Button from '../Elements/Button';
 import { config } from '../config';
 import InfoModal from '../components/InfoModal';
 import BackGround from '../shared/img/bg.jpg';
-import heart from '../shared/img/100.png';
 import { useDispatch } from 'react-redux';
 import { actionCreators as infoActions } from '../redux/modules/info';
 import { message } from 'antd';
@@ -76,7 +75,10 @@ function Main(props) {
           </header>
           <main>
             <ImgWrap>
-              <Img src={heart} alt='img' />
+              <Img
+                src='https://1.bp.blogspot.com/-1BQ8UpCrv6k/YOP6tHLiJ7I/AAAAAAAAAWI/_22820FChB8CFAh3QQB1RW3Vwfop_ilfwCLcBGAsYHQ/s320/100.png'
+                alt='img'
+              />
             </ImgWrap>
             <Member>
               현재까지 <strong>{count}명</strong>이 참여했어요

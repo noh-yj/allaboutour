@@ -8,6 +8,7 @@ function ProgressBar() {
   const resultInfo = useSelector((state) => state.info?.resultInfo.result);
 
   const score = resultInfo?.score;
+  const averageScore = Math.round(score);
 
   // 별자리
   const zodiacSignScore = resultInfo?.individuallyScore.zodiacSignScore;
@@ -28,7 +29,7 @@ function ProgressBar() {
         <Wrap>
           <TextWrap>
             <p>나와 상대의 궁합은</p>
-            <h1>{score}점</h1>
+            <h1>{averageScore}점</h1>
           </TextWrap>
           <ProgressWrap>
             <Progress>

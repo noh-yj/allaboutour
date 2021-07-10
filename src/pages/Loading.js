@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as infoActions } from '../redux/modules/info';
 import BackGround from '../shared/img/bg.jpg';
-import Img from '../shared/img/90.png';
 import { history } from '../redux/configureStore';
 
 function Loading() {
@@ -26,7 +25,10 @@ function Loading() {
     <>
       <Container>
         <main>
-          <Image src={Img} alt='img' />
+          <Image
+            src='https://1.bp.blogspot.com/-Yx_-EB1m5mU/YOP67E9qNaI/AAAAAAAAAWg/SsclgyrBFgMowH6wDxoKGw9KeNo8EaPFgCLcBGAsYHQ/s320/90.png'
+            alt='img'
+          />
           <Text>잠시만 기다려주세요</Text>
         </main>
       </Container>
