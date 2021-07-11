@@ -1,36 +1,4 @@
-# name: React build
-# on:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
-#     branches:
-#       - main
-# # main branch에서 push 이벤트가 일어났을 때만 실행
-# jobs:
-#   build:
-#     runs-on: ubuntu-18.04
-#     steps:
-#       - name: Checkout main
-#         uses: actions/checkout@main
-
-#       - name: Install dependencies
-#         run: yarn install
-
-#       - name: Build
-#         run: yarn build
-
-#       - name: Deploy
-#         env:
-#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#         run: |
-#           aws s3 cp \
-#             --recursive \
-#             --region ap-northeast-2 \
-#             build s3://allaboutour.co.kr
-name: React build # Workflow 이름
-# Event 감지
+name: React build
 on:
   push:
     branches:
@@ -39,27 +7,17 @@ on:
     branches:
       - main
 # main branch에서 push 이벤트가 일어났을 때만 실행
-jobs: # Job 설정
+jobs:
   build:
-    runs-on: ubuntu-18.04 # Job 가상환경 인스턴스
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+      - name: Checkout main
+        uses: actions/checkout@main
 
-      - name: Install Dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
+      - name: Install dependencies
         run: yarn install
 
-      - name: Build # React Build
+      - name: Build
         run: yarn build
 
       - name: Deploy
