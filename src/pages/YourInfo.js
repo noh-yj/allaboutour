@@ -145,7 +145,7 @@ function YourInfo(props) {
               <SortWrap findMbti>
                 <Text>MBTI</Text>
                 <Modal onClick={OpenMbtiModal} isBoolean={Boolean(yourMbti)}>
-                  {yourMbti === '' ? '혈액형을 입력해주세요' : yourMbti}
+                  {yourMbti === '' ? 'MBTI를 입력해주세요' : yourMbti}
                 </Modal>
               </SortWrap>
 
